@@ -1,0 +1,22 @@
+.wrapper_dark {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: rgb(9, 9, 65);
+    transition: background 0.5s ease;
+}
+.wrapper_light {
+    height: 100vh;
+    display: grid;
+    place-items: center;
+    background: rgb(238, 237, 237);
+    transition: background 0.5s ease;
+}
+.main_dark {
+    font-size: 3rem;
+    color: white;
+}
+.main_light {
+    font-size: 3rem;
+    color: black
+}
