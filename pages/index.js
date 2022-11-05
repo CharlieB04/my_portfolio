@@ -19,7 +19,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={darkMode ? [style.wrapper_dark, style.wrapper].join(" ") 
+    <Box className={darkMode ? [style.wrapper_dark, style.wrapper].join(" ") 
          : [style.wrapper_light, style.wrapper].join(" ")}>
       <Head>
         <title>Home</title>
@@ -29,7 +29,7 @@ export default function Home() {
 
       <Box className={darkMode ?  [style.main_dark, style.main].join(" ") 
             :  [style.main_light, style.main].join(" ")}
-            width={['100vw', '75vw','75vw', '75vw']}
+            width={['100vw', '100vw','75vw', '75vw']}
       >
           <motion.div ref={carousel} className={style.carousel}>
             <motion.div ref={inn} className={style.inner_carousel}
@@ -47,6 +47,6 @@ export default function Home() {
             </motion.div>
           </motion.div>
       </Box>
-    </div>
+    </Box>
   );
 }

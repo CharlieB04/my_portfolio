@@ -1,7 +1,6 @@
 .wrapper {
-    overflow-y: auto;
     transition: background 0.5s ease;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
 }
 .wrapper_dark {
@@ -12,7 +11,9 @@
 }
 .main {
     font-size: 3rem;
+    height: 100%;
     width: 75vw;
+    overflow-y: auto;
 }
 .main_dark {
     color: white;
