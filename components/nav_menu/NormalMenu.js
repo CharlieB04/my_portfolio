@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Box } from '@chakra-ui/react';
 
 import Image from 'next/image';
@@ -5,7 +6,7 @@ import Link from 'next/link';
 
 import ThemeMenu from './ThemeMenu';
 
-import { themeSwitch } from '../../lib/context';
+import { ThemeContext } from '../../lib/context';
 
 import { appRoutes } from '../../lib/appRoutes';
 
@@ -13,7 +14,7 @@ import styles from '../../styles/Nav.module.css';
 
 
 export default function NormalMenu() {
-    const { darkMode } = themeSwitch();
+    const { darkMode } = useContext(ThemeContext);
     return (
         <Box className={darkMode ?  [styles.nav_dark, styles.nav].join(" ") 
                 :  [styles.nav_light, styles.nav].join(" ")}

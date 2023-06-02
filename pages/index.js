@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import Head from 'next/head';
 import style from '../styles/Home.module.css'; 
 import { motion } from 'framer-motion'; 
 import { Box, Flex, Avatar, Text } from '@chakra-ui/react';
-import { themeSwitch } from '../lib/context';
+import { ThemeContext } from '../lib/context';
 import images from '../lib/images';
 
 export default function Home() {
-  const { darkMode } = themeSwitch();
+  const { darkMode } = useContext(ThemeContext);
 /*   const [width, setWidth] = useState(0);
 
   const carousel = useRef();

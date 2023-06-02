@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import {Box, IconButton} from '@chakra-ui/react';
 import {CloseIcon, HamburgerIcon} from '@chakra-ui/icons';
@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import ThemeMenu from './ThemeMenu';
 
-import { themeSwitch } from '../../lib/context';
+import { ThemeContext } from '../../lib/context';
 
 import { appRoutes } from '../../lib/appRoutes';
 
@@ -16,7 +16,7 @@ import styles from '../../styles/Nav.module.css';
 const {motion} =  require("framer-motion");
 
 export default function ResponsiveMenu() {
-    const { darkMode } = themeSwitch();
+    const { darkMode } = useContext(ThemeContext);
     const [display, changeDisplay] = useState('none');
     const variants = {
         open: { opacity: 1},

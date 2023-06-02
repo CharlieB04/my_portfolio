@@ -1,9 +1,10 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button } from '@chakra-ui/react';
 import { ChevronDownIcon, MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { themeSwitch } from '../../lib/context';
+import { ThemeContext } from '../../lib/context';
+import { useContext } from 'react';
 
 export default function ThemeMenu() {
-    const { darkMode, toggleTheme } = themeSwitch();
+    const { darkMode, toggleTheme } = useContext(ThemeContext);
     return (
         <Menu>
             <MenuButton as={Button} 

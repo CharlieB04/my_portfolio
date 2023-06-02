@@ -1,13 +1,14 @@
+import { useContext } from 'react';
 import { Box } from '@chakra-ui/react';
 import Head from 'next/head';
-import { themeSwitch } from "../lib/context";
+import { ThemeContext } from "../lib/context";
 import WeatherSearch from '../components/weather_app/WeatherSearch';
 import WeatherView from '../components/weather_app/WeatherView';
 import style from '../styles/WeatherApp.module.css';
 
-export default function weatherApp() {
+export default function WeatherApp() {
        
-    const { darkMode } = themeSwitch();
+    const { darkMode } = useContext(ThemeContext);
     return (
         <Box className={darkMode ?  [style.wrapper_dark, style.wrapper].join(" ") 
              : [style.wrapper_light, style.wrapper].join(" ")}>
