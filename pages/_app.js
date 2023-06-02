@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import Layout from '../components/Layout';
+import Layout from '../components/nav_menu/Layout';
 import { ChakraProvider } from '@chakra-ui/react';
 import { ThemeProvider } from '../lib/context';
 import { myBreakpoints } from '../styles/breakpoints';

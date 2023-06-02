@@ -1,7 +1,5 @@
 .wrapper {
     transition: background 0.5s ease;
-    height: 100%;
-    width: 100vw;
 }
 .wrapper_dark {
     background: rgb(9, 9, 65);

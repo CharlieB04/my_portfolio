@@ -1,6 +1,5 @@
 .wrapper {
     transition: background 0.5s ease;
-    overflow-y: auto;
 }
 .wrapper_dark {
     background: rgb(9, 9, 65);
@@ -18,11 +17,4 @@
 }
 .main_light {
     color: black
-}
-.weatherMainCitiesContainer {
-    width: 100%;
-    display: grid;
-    padding: 20px;
-    /* grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr)); */
-    gap: 20px 20px;
 }

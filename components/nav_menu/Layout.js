@@ -1,6 +1,6 @@
  import Nav from './Nav';
  import { Box } from '@chakra-ui/react';
- import styles from '../styles/Nav.module.css';
+ import styles from '../../styles/Nav.module.css';
 
  export default function Layout({children}) {
     return (
@@ -9,7 +9,7 @@
                ['100vw', '100vw', '25vw 75vw', '25vw 75vw']
              }
              gridTemplateRows={
-               ['25vh 75vh', '25vh 75vh', '100vh', '100vh']    
+               ['10vh 90vh', '10vh 90vh', 'auto', 'auto']    
              } 
         >
             <Nav />
