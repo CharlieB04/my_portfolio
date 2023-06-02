@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import ThemeMenu from './ThemeMenu';
 
-import { useThemeSwitch } from '../../lib/context';
+import { themeSwitch } from '../../lib/context';
 
 import { appRoutes } from '../../lib/appRoutes';
 
@@ -16,7 +16,7 @@ import styles from '../../styles/Nav.module.css';
 const {motion} =  require("framer-motion");
 
 export default function ResponsiveMenu() {
-    const { darkMode } = useThemeSwitch();
+    const { darkMode } = themeSwitch();
     const [display, changeDisplay] = useState('none');
     const variants = {
         open: { opacity: 1},

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchedCityFetch } from "../../hooks/useWeatherFetch";
+import { fetchSearchedCityFetch } from "../../lib/WeatherFetch";
 import { Box, Heading, Flex } from '@chakra-ui/react';
 import { TimeIcon } from "@chakra-ui/icons";
 import WeatherInfoTemplate from "./WeatherInfoTemplate";
@@ -10,7 +10,7 @@ export default function SearchedCityWeather({city}) {
     const [cityWeatherInfo, setCityWeatherInfo] = useState();
 
     useEffect(() => {
-        useSearchedCityFetch(city)
+        fetchSearchedCityFetch(city)
             .then(data => setCityWeatherInfo(data))
             .catch(console.log);
     }, [city]);

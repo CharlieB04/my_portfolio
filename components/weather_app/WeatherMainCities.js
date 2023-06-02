@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { useWeatherMainCitiesFetch } from '../../hooks/useWeatherFetch';
+import { fetchWeatherMainCitiesFetch } from '../../lib/WeatherFetch';
 import { useEffect, useState} from 'react';
 import WeatherMainCitiesContainer from './WeatherMainCitiesContainer';
 import LoadingSpinner from '../items/LoadingSpinner';
@@ -8,7 +8,7 @@ export default function WeatherMainCities() {
     const [citiesWeather, setCitiesWeather] = useState();
 
     useEffect(() => {
-        useWeatherMainCitiesFetch()
+        fetchWeatherMainCitiesFetch()
             .then(data => setCitiesWeather(data))
             .catch(console.log);
     },[]);

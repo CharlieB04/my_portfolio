@@ -2,11 +2,11 @@ import { useState, useRef } from 'react';
 import Head from 'next/head';
 import {Box, Input, InputLeftElement, InputGroup, Button, Checkbox} from '@chakra-ui/react';
 import { EditIcon } from '@chakra-ui/icons';
-import { useThemeSwitch } from '../lib/context';
+import { themeSwitch } from '../lib/context';
 import style from '../styles/Todo.module.css'; 
 
 export default function TodoListApp() {
-    const { darkMode } = useThemeSwitch();
+    const { darkMode } = themeSwitch();
     const [todos, setTodos] = useState([]);
     const todo = useRef();
 

@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import {Box, Input, InputLeftElement, InputGroup, Button} from '@chakra-ui/react';
 import {SunIcon} from '@chakra-ui/icons';
-import { useThemeSwitch } from '../../lib/context';
+import { themeSwitch } from '../../lib/context';
 
 export default function WeatherSearch({children}) {
     const city = useRef();
-    const {darkMode} = useThemeSwitch();
+    const {darkMode} = themeSwitch();
     const [cityName, setCityName] = useState('');
 
     const handleSubmit = () => {

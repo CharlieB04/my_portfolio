@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import ThemeMenu from './ThemeMenu';
 
-import { useThemeSwitch } from '../../lib/context';
+import { themeSwitch } from '../../lib/context';
 
 import { appRoutes } from '../../lib/appRoutes';
 
@@ -13,7 +13,7 @@ import styles from '../../styles/Nav.module.css';
 
 
 export default function NormalMenu() {
-    const { darkMode } = useThemeSwitch();
+    const { darkMode } = themeSwitch();
     return (
         <Box className={darkMode ?  [styles.nav_dark, styles.nav].join(" ") 
                 :  [styles.nav_light, styles.nav].join(" ")}

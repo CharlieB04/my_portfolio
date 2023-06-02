@@ -3,11 +3,11 @@ import Head from 'next/head';
 import style from '../styles/Home.module.css'; 
 import { motion } from 'framer-motion'; 
 import { Box, Flex, Avatar, Text } from '@chakra-ui/react';
-import { useThemeSwitch } from '../lib/context';
+import { themeSwitch } from '../lib/context';
 import images from '../lib/images';
 
 export default function Home() {
-  const { darkMode } = useThemeSwitch();
+  const { darkMode } = themeSwitch();
 /*   const [width, setWidth] = useState(0);
 
   const carousel = useRef();
