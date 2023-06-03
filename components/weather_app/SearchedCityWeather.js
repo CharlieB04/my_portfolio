@@ -37,13 +37,16 @@ export default function SearchedCityWeather({city}) {
                     placeItems='center'
                     h={['30vh', '30vh', '35vh', '35vh']}
                 >
+                    
                     <Flex 
                         direction='column' 
                         align='center'
                         justify='space-around' 
                         h='22vh' 
+                        fontSize={['1.6rem','1.6rem','3rem','3rem']}
+                        textAlign='center'
                     >
-                            <TimeIcon w='3rem' h='3rem' />
+                            <TimeIcon w={['2rem','2rem','3rem','3rem']} h={['2rem','2rem','3rem','3rem']} />
                             {cityWeatherInfo.message}
                     </Flex>
                 </Box>)
