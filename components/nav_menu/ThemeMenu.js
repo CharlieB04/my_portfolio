@@ -18,6 +18,7 @@ export default function ThemeMenu() {
             <MenuList background={darkMode ? 'rgb(9, 9, 65)' : 'rgb(238, 237, 237)'}
                       color={darkMode ? 'white' : 'black'}
                       border='none'
+                      zIndex='50'
             >
                 <MenuItem onClick={() => toggleTheme('dark')}
                         _focus={false}

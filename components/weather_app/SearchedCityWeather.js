@@ -22,7 +22,7 @@ export default function SearchedCityWeather({city}) {
                 w='100%' 
                 display='grid'
                 placeItems='center'
-                h={['30vh', '30vh', '35vh', '35vh']}
+                h={['60vh', '60vh', '35vh', '35vh']}
             >
                 <LoadingSpinner width='40%' height='40%'/>
             </Box>)
@@ -53,7 +53,12 @@ export default function SearchedCityWeather({city}) {
                 w='100%' 
                 h='auto'
             >
-                <Heading ml={['25px','25px','15px','15px']}>Search Results</Heading>
+                <Heading 
+                    ml={['25px','25px','15px','15px']}
+                    fontSize={['xl','xl','4xl','4xl']}
+                >
+                    Search Results
+                </Heading>
                 <Box
                     w={['91%','91%','97%','97%']}
                     h='50vh'

@@ -29,9 +29,9 @@ export default function WeatherSearch({children}) {
                 justifyContent={['center', 'center', 'left', 'left']}
             >
                 <InputGroup 
-                    w={['60%', '50%', '25%', '25%']}
-                    ml='20px'
-                    mt='2px'>
+                    w={['90%', '60%', '25%', '25%']}
+                    ml={['','','','20px']}
+                    mt={['10px','2px','2px','2px']}>
                     <InputLeftElement pointerEvents='none'>
                         <SunIcon color={darkMode ? 'gray.300' : 'black'} />
                     </InputLeftElement>
