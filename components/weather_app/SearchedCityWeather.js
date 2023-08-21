@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { fetchSearchedCityFetch } from "../../lib/WeatherFetch";
+import { fetchSearchedCityFetch } from "../../lib/weather_app/WeatherFetch";
 import { Box, Heading, Flex } from '@chakra-ui/react';
 import { TimeIcon } from "@chakra-ui/icons";
 import WeatherInfoTemplate from "./WeatherInfoTemplate";
 import LoadingSpinner from "../items/LoadingSpinner";
-import { getCardParams } from "../../lib/getCardParams";
+import { getCardParams } from "../../lib/weather_app/getCardParams";
 
 export default function SearchedCityWeather({city}) {
     const [cityWeatherInfo, setCityWeatherInfo] = useState();

@@ -1,5 +1,5 @@
 import WeatherInfoTemplate from './WeatherInfoTemplate';
-import { getCardParams } from '../../lib/getCardParams';
+import { getCardParams } from '../../lib/weather_app/getCardParams';
 import { Box, Heading} from '@chakra-ui/react';
 import styles from '../../styles/WeatherApp.module.css';
 

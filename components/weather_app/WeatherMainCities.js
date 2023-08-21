@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { fetchWeatherMainCitiesFetch } from '../../lib/WeatherFetch';
+import { fetchWeatherMainCitiesFetch } from '../../lib/weather_app/WeatherFetch';
 import { useEffect, useState } from 'react';
 import WeatherMainCitiesContainer from './WeatherMainCitiesContainer';
 import LoadingSpinner from '../items/LoadingSpinner';

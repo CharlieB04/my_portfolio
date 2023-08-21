@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import Head from 'next/head';
 import style from '../styles/Home.module.css'; 
 import { motion } from 'framer-motion'; 
@@ -30,6 +30,7 @@ export default function Home() {
       <Box className={darkMode ?  [style.main_dark, style.main].join(" ") 
             :  [style.main_light, style.main].join(" ")}
             width={['100vw', '100vw','75vw', '75vw']}
+            border='solid'
       >
          {/*  <motion.div ref={carousel} className={style.carousel}>
             <motion.div ref={inn} className={style.inner_carousel}
@@ -52,14 +53,15 @@ export default function Home() {
               gap='1rem'
               border='solid'
               p='20px'
+              height='100%'
         >
-              <Avatar name='Carlos Quintero' size='2xl'/>
-              <Text fontSize='6xl'>Hello!!</Text>
-              <Text fontSize='4xl' textAlign='center'>
+              <Avatar name='Carlos Quintero' size={['xl','xl','2xl','2xl']}/>
+              <Text fontSize={['4xl','5xl','6xl','6xl']}>Hello!!</Text>
+              <Text fontSize={['3xl','3xl','4xl','4xl']} textAlign='center'>
                 I'm Carlos Quintero González, Mexican Systems Engineer and this is my
                 Portfolio
               </Text>
-              <Text fontSize='4xl' textAlign='center'>
+              <Text fontSize={['3xl','3xl','4xl','4xl']} textAlign='center'>
                 Here you gonna find my JS and React Skills,
                 this website was created with Next.js and lot of effort!!
               </Text>
