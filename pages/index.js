@@ -55,13 +55,13 @@ export default function Home() {
               p='20px'
               height='100%'
         >
-              <Avatar name='Carlos Quintero' size={['xl','xl','2xl','2xl']}/>
-              <Text fontSize={['4xl','5xl','6xl','6xl']}>Hello!!</Text>
-              <Text fontSize={['3xl','3xl','4xl','4xl']} textAlign='center'>
+              <Avatar name='Carlos Quintero' size={['md','xl','2xl','2xl']}/>
+              <Text fontSize={['3xl','4xl','6xl','6xl']}>Hello!!</Text>
+              <Text fontSize={['2xl','3xl','4xl','4xl']} textAlign='center'>
                 I'm Carlos Quintero González, Mexican Systems Engineer and this is my
                 Portfolio
               </Text>
-              <Text fontSize={['3xl','3xl','4xl','4xl']} textAlign='center'>
+              <Text fontSize={['2xl','3xl','4xl','4xl']} textAlign='center'>
                 Here you gonna find my JS and React Skills,
                 this website was created with Next.js and lot of effort!!
               </Text>
