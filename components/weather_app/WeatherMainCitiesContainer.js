@@ -19,7 +19,7 @@ export default function WeatherMainCitiesContainer({citiesWeather}) {
                   const {cardColor, fontColor, dayMoment} = getCardParams(city.dt, city.sys.timezone);
                   return (
                     <Box
-                        h={['45vh','45vh','40vh','40vh']}
+                        h={['55vh','45vh','40vh','40vh']}
                         borderRadius={7}
                         bgGradient={cardColor}
                         color={fontColor}

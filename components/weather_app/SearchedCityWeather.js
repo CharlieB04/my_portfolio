@@ -64,7 +64,7 @@ export default function SearchedCityWeather({city}) {
                 </Heading>
                 <Box
                     w={['91%','91%','97%','97%']}
-                    h='50vh'
+                    h='60vh'
                     ml='auto'
                     mr='auto'
                     mt='15px'
