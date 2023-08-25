@@ -8,7 +8,6 @@ export default function LoadingSpinner({width, height}) {
             alignItems='center'
             w={width}
             h={height}
-            border='solid'
         >
             <Spinner
                 ml='auto'
