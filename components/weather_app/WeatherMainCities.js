@@ -17,7 +17,7 @@ export default function WeatherMainCities() {
 
         !citiesWeather ?
             (<Box w='100%' h='100%' display='grid' placeItems='center'>
-                <LoadingSpinner width='40%' height='20%'/>
+                <LoadingSpinner width={['80%','80%','40%','40%']} height={['30%','60%','20%','20%']}/>
             </Box>)
         : (<WeatherMainCitiesContainer citiesWeather={citiesWeather}/>)
     );

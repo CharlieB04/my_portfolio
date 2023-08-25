@@ -24,7 +24,7 @@ export default function SearchedCityWeather({city}) {
                 placeItems='center'
                 h={['60vh', '60vh', '35vh', '35vh']}
             >
-                <LoadingSpinner width='40%' height='40%'/>
+                <LoadingSpinner width={['80%','80%','40%','40%']} height={['40%','40%','40%','40%']}/>
             </Box>)
 
             :
@@ -69,12 +69,12 @@ export default function SearchedCityWeather({city}) {
                     mr='auto'
                     mt='15px'
                     borderRadius={7}
-                    background={ getCardParams(cityWeatherInfo.dt, cityWeatherInfo.timezone).cardColor}
-                    color={ getCardParams(cityWeatherInfo.dt, cityWeatherInfo.timezone).fontColor}
+                    bgGradient={ getCardParams(cityWeatherInfo.dt, cityWeatherInfo.timezone).cardColor }
+                    color={ getCardParams(cityWeatherInfo.dt, cityWeatherInfo.timezone).fontColor }
                     position='relative'
                     key={cityWeatherInfo.id}
                 >
-                    <WeatherInfoTemplate city={cityWeatherInfo} dayMoment={ getCardParams(cityWeatherInfo.dt, cityWeatherInfo.timezone).dayMoment}/>
+                    <WeatherInfoTemplate city={cityWeatherInfo} dayMoment={ getCardParams(cityWeatherInfo.dt, cityWeatherInfo.timezone).dayMoment }/>
                 </Box>
             </Box>)
     );

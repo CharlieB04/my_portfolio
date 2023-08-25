@@ -148,7 +148,7 @@ export default function TodoListApp() {
                         
                         {/*Form*/}
                         <InputGroup 
-                            w='70%'
+                            w={['90%','90%','70%','70%']}
                             mr='auto'
                             ml='auto'
                             mt='25px'
@@ -187,8 +187,10 @@ export default function TodoListApp() {
                                 justify='space-around'
                                 width='100%'
                                 mt='40px'
-                                pl='30px'
+                                pl={['10px','10px','30px','30px']}
+                                wordBreak='break-word'
                                 gap='20px'
+                                border='solid'
                             >
                                 {/*Title*/}
                                 <Heading 
@@ -210,6 +212,8 @@ export default function TodoListApp() {
                                         initial={{ scale: 0 }}
                                         exit={{ scale: 0 }}
                                         animate={{ scale: 1 }}
+                                        
+                                        border='solid'
                                     >
                                         <Button 
                                             leftIcon={<DeleteIcon />} 
@@ -239,6 +243,7 @@ export default function TodoListApp() {
                                     width='90%' 
                                     ref={container}
                                     pb='20px'
+                                    border='solid'
                                 >
                                     {todoList && todoList.map(todo => (
                                         <Flex
@@ -249,9 +254,9 @@ export default function TodoListApp() {
                                             justify='space-around'
                                             align='center'
                                             gap='7px'
-                                            p='15px'
+                                            p='7px'
                                             borderRadius='5px'
-                                            height='5vh'
+                                            height='auto'
                                             bg='#8a8585'
                                             boxShadow='md'
                                             key={todo.id}
@@ -265,7 +270,7 @@ export default function TodoListApp() {
                                             >
                                             </input>
                                             <Text
-                                                fontSize={['lg','lg','md','md']}
+                                                fontSize='md'
                                                 cursor='pointer'
                                                 color='white'
                                                 as='b'
@@ -286,7 +291,7 @@ export default function TodoListApp() {
                                     justify='space-around'
                                     width='100%'
                                     mt='40px'
-                                    pl='30px'
+                                    pl={['10px','10px','30px','30px']}
                                     gap='20px'
                                     mb='200px'
                                 >
@@ -319,16 +324,16 @@ export default function TodoListApp() {
                                                 justify='space-around'
                                                 align='center'
                                                 gap='7px'
-                                                p='15px'
+                                                p='7px'
                                                 borderRadius='5px'
-                                                height='5vh'
                                                 bg='#00A767'
+                                                wordBreak='break-word'
                                                 boxShadow='md'
                                                 key={todo.id}
                                             >
                                                 <CheckIcon fontSize='md' color='white'/>
                                                 <Text
-                                                    fontSize={['lg','lg','md','md']}
+                                                    fontSize='md'
                                                     cursor='pointer'
                                                     as='b'
                                                     color='white'
