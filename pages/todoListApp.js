@@ -240,7 +240,6 @@ export default function TodoListApp() {
                                     width='90%' 
                                     ref={container}
                                     pb='20px'
-                                    border='solid'
                                 >
                                     {todoList && todoList.map(todo => (
                                         <Flex
