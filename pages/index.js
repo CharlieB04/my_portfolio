@@ -55,7 +55,8 @@ export default function Home() {
             justify='space-around'
             gap='1rem'
             p='20px'
-            height={['70%','100%','100%','100%']}
+            height={['85%','100%','100%','100%']}
+            border='solid'
         >
               <Avatar name='Carlos Quintero' size={['lg','xl','2xl','2xl']}/>
               <Text fontSize={['xl','4xl','6xl','6xl']}>Hello!!</Text>
