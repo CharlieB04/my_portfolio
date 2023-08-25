@@ -30,7 +30,9 @@ export default function Home() {
       <Box className={darkMode ?  [style.main_dark, style.main].join(" ") 
             :  [style.main_light, style.main].join(" ")}
             width={['100vw', '100vw','75vw', '75vw']}
-            border='solid'
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
       >
          {/*  <motion.div ref={carousel} className={style.carousel}>
             <motion.div ref={inn} className={style.inner_carousel}
@@ -47,21 +49,21 @@ export default function Home() {
               })}
             </motion.div>
           </motion.div> */}
-        <Flex direction='column' 
-              align='center' 
-              justify='space-around' 
-              gap='1rem'
-              border='solid'
-              p='20px'
-              height='100%'
+        <Flex 
+            direction='column' 
+            align='center' 
+            justify='space-around'
+            gap='1rem'
+            p='20px'
+            height={['70%','100%','100%','100%']}
         >
-              <Avatar name='Carlos Quintero' size={['md','xl','2xl','2xl']}/>
-              <Text fontSize={['3xl','4xl','6xl','6xl']}>Hello!!</Text>
-              <Text fontSize={['2xl','3xl','4xl','4xl']} textAlign='center'>
+              <Avatar name='Carlos Quintero' size={['lg','xl','2xl','2xl']}/>
+              <Text fontSize={['xl','4xl','6xl','6xl']}>Hello!!</Text>
+              <Text fontSize={['lg','3xl','4xl','4xl']} textAlign='center'>
                 I'm Carlos Quintero González, Mexican Systems Engineer and this is my
                 Portfolio
               </Text>
-              <Text fontSize={['2xl','3xl','4xl','4xl']} textAlign='center'>
+              <Text fontSize={['lg','3xl','4xl','4xl']} textAlign='center'>
                 Here you gonna find my JS and React Skills,
                 this website was created with Next.js and lot of effort!!
               </Text>
