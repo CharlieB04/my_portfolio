@@ -190,7 +190,6 @@ export default function TodoListApp() {
                                 pl={['10px','10px','30px','30px']}
                                 wordBreak='break-word'
                                 gap='20px'
-                                border='solid'
                             >
                                 {/*Title*/}
                                 <Heading 
@@ -212,8 +211,6 @@ export default function TodoListApp() {
                                         initial={{ scale: 0 }}
                                         exit={{ scale: 0 }}
                                         animate={{ scale: 1 }}
-                                        
-                                        border='solid'
                                     >
                                         <Button 
                                             leftIcon={<DeleteIcon />} 
