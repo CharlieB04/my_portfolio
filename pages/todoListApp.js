@@ -1,349 +1,358 @@
-import Head from 'next/head';
+import Head from "next/head";
 import { ThemeContext } from "../lib/context";
-import { useContext, useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { v4 as uuidv4 } from 'uuid';
-import { 
-        Box, 
-        Flex, 
-        Heading, 
-        Input, 
-        InputLeftElement, 
-        InputGroup, 
-        Button,
-        Text, 
-        Badge
-} from '@chakra-ui/react';
-import { AddIcon, ChatIcon, CheckIcon, DeleteIcon } from '@chakra-ui/icons';
-import style from '../styles/WeatherApp.module.css';
+import { useContext, useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { v4 as uuidv4 } from "uuid";
+import {
+  Box,
+  Flex,
+  Heading,
+  Input,
+  InputLeftElement,
+  InputGroup,
+  Button,
+  Text,
+  Badge,
+} from "@chakra-ui/react";
+import { AddIcon, ChatIcon, CheckIcon, DeleteIcon } from "@chakra-ui/icons";
+import style from "../styles/WeatherApp.module.css";
 
 export default function TodoListApp() {
-    const { darkMode } = useContext(ThemeContext);
-    const [todoList, setTodoList] = useState([]);
-    const [completedTodos, setCompletedTodos] = useState([]);
-    const todo = useRef();
-    const container = useRef();
-    const first = useRef(true);
-    const first2 = useRef(true);
+  const { darkMode } = useContext(ThemeContext);
+  const [todoList, setTodoList] = useState([]);
+  const [completedTodos, setCompletedTodos] = useState([]);
+  const todo = useRef();
+  const container = useRef();
+  const first = useRef(true);
+  const first2 = useRef(true);
 
-    useEffect(() => {
-        const storedTodos = localStorage.getItem('user_todo_list');
-        const storedCheckedTodos = localStorage.getItem('checked_todos');
-        if (storedTodos !== null && storedCheckedTodos !== null) {
-            setTodoList(JSON.parse(storedTodos));
-            setCompletedTodos(JSON.parse(storedCheckedTodos));
+  useEffect(() => {
+    const storedTodos = localStorage.getItem("user_todo_list");
+    const storedCheckedTodos = localStorage.getItem("checked_todos");
+    if (storedTodos !== null && storedCheckedTodos !== null) {
+      setTodoList(JSON.parse(storedTodos));
+      setCompletedTodos(JSON.parse(storedCheckedTodos));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (todoList.length < 5) {
+      container.current.style.height = "auto";
+      container.current.style.overflow = "hidden";
+    }
+    if (first.current) {
+      first.current = false;
+      return;
+    }
+    localStorage.setItem("user_todo_list", JSON.stringify(todoList));
+  }, [todoList]);
+
+  useEffect(() => {
+    if (first2.current) {
+      first2.current = false;
+      return;
+    }
+    localStorage.setItem("checked_todos", JSON.stringify(completedTodos));
+  }, [completedTodos]);
+
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        addTodo();
+      }
+    });
+  }, []);
+
+  const addTodo = () => {
+    if (todoList.length > 5) {
+      container.current.style.height = "250px";
+      container.current.style.overflow = "auto";
+    }
+    const todoValue = todo.current.value;
+    if (todoValue === "") return;
+    if (todoList.length === 0) {
+      setTodoList([{ id: uuidv4(), task: todoValue }]);
+    } else {
+      setTodoList((prev) => [...prev, { id: uuidv4(), task: todoValue }]);
+    }
+    todo.current.value = "";
+    todo.current.focus();
+  };
+
+  const cleanForm = () => {
+    todo.current.value = "";
+    todo.current.focus();
+  };
+
+  const removeAll = () => {
+    container.current.style.height = "auto";
+    container.current.style.overflow = "hidden";
+    setTodoList([]);
+  };
+
+  const checkTodo = (evt) => {
+    const task = evt.target.value;
+    const newTodos = todoList.filter((todo) => todo.id != task);
+    const completedTodo = todoList.filter((todo) => todo.id === task);
+    setTodoList(newTodos);
+    if (completedTodos.length === 5) setCompletedTodos([]);
+    if (completedTodos.length === 0) {
+      setCompletedTodos(completedTodo);
+    } else {
+      setCompletedTodos((prev) => [...prev, completedTodo[0]]);
+    }
+  };
+
+  const checkAllTodos = () => {
+    const completed = [];
+    if (completedTodos.length === 0 && todoList.length <= 5) {
+      setCompletedTodos([...todoList]);
+    } else if (todoList.length <= 5) {
+      const limit = 5 - completedTodos.length;
+      if (limit === 0) {
+        setCompletedTodos([...todoList]);
+      } else if (todoList.length === 5) {
+        for (var i = 0; i < 5; i++) {
+          completed.push(todoList[i]);
         }
-    }, []);
-
-    useEffect(() => {
-        if (todoList.length < 5) {
-            container.current.style.height = 'auto';
-            container.current.style.overflow = 'hidden';
+        setCompletedTodos(completed);
+      } else {
+        setCompletedTodos((prev) => [...prev, ...todoList]);
+      }
+    } else {
+      if (completedTodos.length === 0) {
+        for (var i = 0; i < 5; i++) {
+          completed.push(todoList[i]);
         }
-        if (first.current) {first.current = false; return;}
-        localStorage.setItem('user_todo_list', JSON.stringify(todoList));
-    }, [todoList]);
-
-    useEffect(() => {
-        if (first2.current) { first2.current = false; return;}
-        localStorage.setItem('checked_todos', JSON.stringify(completedTodos));
-    }, [completedTodos]);
-
-    useEffect(() => {
-        window.addEventListener('keydown', e => {
-            if (e.key === 'Enter') {
-                addTodo();
-            }
-        });
-    }, [])
-
-    const addTodo = () => {
-        if ( todoList.length > 5) {
-            container.current.style.height = '250px';
-            container.current.style.overflow = 'auto';
+        setCompletedTodos(completed);
+      } else if (completedTodos.length < 5) {
+        for (var i = 0; i < 5; i++) {
+          completed.push(todoList[i]);
         }
-        const todoValue = todo.current.value;
-        if (todoValue === '') return;
-        if (todoList.length === 0) {
-            setTodoList([{id: uuidv4(), task: todoValue}]);
-        } else {
-            setTodoList(prev => [...prev, {id: uuidv4(), task: todoValue}]);
+        setCompletedTodos(completed);
+      } else {
+        for (var i = 0; i < 5 - completedTodos.length; i++) {
+          completed.push(todoList[i]);
         }
-        todo.current.value = '';
-        todo.current.focus();
-    };
-    
-    const cleanForm = () => {
-        todo.current.value = '';
-        todo.current.focus();
-    };
+        setCompletedTodos((prev) => [...prev, ...completed]);
+      }
+    }
+    setTodoList([]);
+    container.current.style.height = "auto";
+    container.current.style.overflow = "hidden";
+  };
 
-    const removeAll = () => {
-        container.current.style.height = 'auto';
-        container.current.style.overflow = 'hidden';
-        setTodoList([]);
-    };
-
-    const checkTodo = (evt) => {
-        const task = evt.target.value;
-        const newTodos = todoList.filter(todo => todo.id != task);
-        const completedTodo = todoList.filter(todo => todo.id === task);
-        setTodoList(newTodos)
-        if (completedTodos.length === 5) setCompletedTodos([]);
-        if (completedTodos.length === 0) {
-            setCompletedTodos(completedTodo);
-        } else {
-            setCompletedTodos(prev => [...prev, completedTodo[0]]);
+  return (
+    <Box
+      className={
+        darkMode
+          ? [style.wrapper_dark, style.wrapper].join(" ")
+          : [style.wrapper_light, style.wrapper].join(" ")
+      }
+    >
+      <Head>
+        <title>Todo List App</title>
+        <meta name="description" content="Generated by create next app" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Box
+        className={
+          darkMode
+            ? [style.main_dark, style.main].join(" ")
+            : [style.main_light, style.main].join(" ")
         }
-    };
+        width={["100vw", "100vw", "75vw", "75vw"]}
+      >
+        {/*Form*/}
+        <InputGroup
+          w={["90%", "90%", "70%", "70%"]}
+          mr="auto"
+          ml="auto"
+          mt="25px"
+        >
+          <InputLeftElement pointerEvents="none">
+            <ChatIcon color={darkMode ? "gray.300" : "black"} />
+          </InputLeftElement>
+          <Input
+            fontSize={["sm", "sm", "md", "md"]}
+            placeholder="Just type your things"
+            borderColor={darkMode ? "" : "black"}
+            ref={todo}
+          />
+          <Button colorScheme="blue" ml="10px" onClick={addTodo}>
+            <AddIcon color="white" />
+          </Button>
+          <Button colorScheme="blue" ml="10px" onClick={cleanForm}>
+            Clean
+          </Button>
+        </InputGroup>
+        <AnimatePresence>
+          {" "}
+          {/*Necessary for exit animation*/}
+          {/*ToDos Main Container*/}
+          <Flex
+            direction="column"
+            align="flex-start"
+            justify="space-around"
+            width="100%"
+            mt="40px"
+            pl={["10px", "10px", "30px", "30px"]}
+            wordBreak="break-word"
+            gap="20px"
+          >
+            {/*Title*/}
+            <Heading
+              fontSize={["xl", "xl", "4xl", "4xl"]}
+              width="90%"
+              as={motion.div}
+              initial={{ scale: 0 }}
+              exit={{ scale: 0 }}
+              animate={{ scale: 1 }}
+            >
+              Your ToDos
+            </Heading>
 
-    const checkAllTodos = () => {
-        const completed = [];
-        if (completedTodos.length === 0 && todoList.length <= 5) {
-            setCompletedTodos([...todoList]);
-        } 
-        else if (todoList.length <= 5) {
-            const limit = 5 - completedTodos.length;
-            if (limit === 0) {
-                setCompletedTodos([...todoList]);
-            }
-            else if (todoList.length === 5) {
-                for (var i = 0; i < 5; i++) { completed.push(todoList[i]);};
-                setCompletedTodos(completed);
-            }
-            else {
-                setCompletedTodos(prev => [...prev, ...todoList]);
-            }
-        }
-        else { 
-            if (completedTodos.length === 0 ) {
-                for (var i = 0; i < 5; i++) { completed.push(todoList[i]);};
-                setCompletedTodos(completed);
-            }
-            else if (completedTodos.length < 5) {
-                for (var i = 0; i < 5; i++) { completed.push(todoList[i]);};
-                setCompletedTodos(completed);
-            }
-            else {
-                for (var i = 0; i < (5-completedTodos.length); i++) { completed.push(todoList[i]);};
-                setCompletedTodos(prev => [...prev, ...completed]);
-            } 
-        }
-        setTodoList([]); 
-        container.current.style.height = 'auto';
-        container.current.style.overflow = 'hidden';
-    };
+            {todoList.length != 0 && (
+              <Flex
+                justify="space-around"
+                gap="10px"
+                as={motion.div}
+                initial={{ scale: 0 }}
+                exit={{ scale: 0 }}
+                animate={{ scale: 1 }}
+              >
+                <Button
+                  leftIcon={<DeleteIcon />}
+                  colorScheme="red"
+                  variant="solid"
+                  cursor="pointer"
+                  onClick={removeAll}
+                >
+                  Remove All
+                </Button>
+                <Button
+                  leftIcon={<CheckIcon />}
+                  colorScheme="green"
+                  variant="solid"
+                  cursor="pointer"
+                  onClick={checkAllTodos}
+                >
+                  Check All
+                </Button>
+              </Flex>
+            )}
+            {/*ToDos container*/}
+            <Flex
+              direction="column"
+              align="flex-start"
+              gap="20px"
+              width="90%"
+              ref={container}
+              pb="20px"
+            >
+              {todoList &&
+                todoList.map((todo) => (
+                  <Flex
+                    as={motion.div}
+                    initial={{ scale: 0 }}
+                    exit={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    justify="space-around"
+                    align="center"
+                    gap="7px"
+                    p="7px"
+                    borderRadius="5px"
+                    height="auto"
+                    bg="#8a8585"
+                    boxShadow="md"
+                    key={todo.id}
+                  >
+                    <input
+                      type="radio"
+                      value={todo.id}
+                      id={todo.id}
+                      onClick={checkTodo}
+                      style={{
+                        width: "15px",
+                        height: "15px",
+                        cursor: "pointer",
+                      }}
+                    ></input>
+                    <Text
+                      fontSize="md"
+                      cursor="pointer"
+                      color="white"
+                      as="b"
+                      onClick={() => document.getElementById(todo.id).click()}
+                    >
+                      {todo.task}
+                    </Text>
+                  </Flex>
+                ))}
+            </Flex>
+          </Flex>
+          {/*Completed ToDos Container*/}
+          {completedTodos.length !== 0 && (
+            <Flex
+              direction="column"
+              align="flex-start"
+              justify="space-around"
+              width="100%"
+              mt="40px"
+              pl={["10px", "10px", "30px", "30px"]}
+              gap="20px"
+              mb="200px"
+            >
+              {/*Title*/}
+              <Heading
+                fontSize={["xl", "xl", "4xl", "4xl"]}
+                width="90%"
+                as={motion.div}
+                initial={{ scale: 0 }}
+                exit={{ scale: 0 }}
+                animate={{ scale: 1 }}
+              >
+                Recently Checked
+              </Heading>
 
-    return (
-        <Box className={darkMode ? [style.wrapper_dark, style.wrapper].join(" ") 
-                : [style.wrapper_light, style.wrapper].join(" ")}>
-                <Head>
-                    <title>Todo List App</title>
-                    <meta name="description" content="Generated by create next app" />
-                    <link rel="icon" href="/favicon.ico" />
-                </Head>
-                <Box className={darkMode ?  [style.main_dark, style.main].join(" ") 
-                    : [style.main_light, style.main].join(" ")}
-                    width={['100vw', '100vw','75vw', '75vw']}>
-                        
-                        {/*Form*/}
-                        <InputGroup 
-                            w={['90%','90%','70%','70%']}
-                            mr='auto'
-                            ml='auto'
-                            mt='25px'
-                        >
-                            <InputLeftElement pointerEvents='none'>
-                                <ChatIcon color={darkMode ? 'gray.300' : 'black'} />
-                            </InputLeftElement>
-                            <Input 
-                                fontSize={['sm','sm','md','md']}
-                                placeholder='Just type your things' 
-                                borderColor={darkMode ? '' : 'black'}
-                                ref={todo}
-                            />
-                            <Button 
-                                colorScheme='blue' 
-                                ml='10px'
-                                onClick={addTodo}
-                            >
-                                <AddIcon color='white' />
-                            </Button>
-                            <Button 
-                                colorScheme='blue' 
-                                ml='10px' 
-                                onClick={cleanForm}
-                            >
-                                Clean
-                            </Button>
-                        </InputGroup>
-
-                        <AnimatePresence> {/*Necessary for exit animation*/}
-
-                            {/*ToDos Main Container*/}
-                            <Flex
-                                direction='column'
-                                align='flex-start'
-                                justify='space-around'
-                                width='100%'
-                                mt='40px'
-                                pl={['10px','10px','30px','30px']}
-                                wordBreak='break-word'
-                                gap='20px'
-                            >
-                                {/*Title*/}
-                                <Heading 
-                                    fontSize={['xl','xl','4xl','4xl']}
-                                    width='90%'
-                                    as={motion.div}
-                                    initial={{ scale: 0 }}
-                                    exit={{ scale: 0 }}
-                                    animate={{ scale: 1 }}
-                                >
-                                    Your ToDos
-                                </Heading>
-
-                                {todoList.length != 0 && (
-                                    <Flex
-                                        justify='space-around'
-                                        gap='10px'
-                                        as={motion.div}
-                                        initial={{ scale: 0 }}
-                                        exit={{ scale: 0 }}
-                                        animate={{ scale: 1 }}
-                                    >
-                                        <Button 
-                                            leftIcon={<DeleteIcon />} 
-                                            colorScheme='red' 
-                                            variant='solid'
-                                            cursor='pointer'
-                                            onClick={removeAll}
-                                        >
-                                            Remove All
-                                        </Button>
-                                        <Button 
-                                            leftIcon={<CheckIcon />} 
-                                            colorScheme='green' 
-                                            variant='solid'
-                                            cursor='pointer'
-                                            onClick={checkAllTodos}
-                                        >
-                                            Check All
-                                        </Button>
-                                    </Flex>
-                                )}
-                                {/*ToDos container*/}
-                                <Flex 
-                                    direction='column'
-                                    align='flex-start'
-                                    gap='20px'
-                                    width='90%' 
-                                    ref={container}
-                                    pb='20px'
-                                >
-                                    {todoList && todoList.map(todo => (
-                                        <Flex
-                                            as={motion.div}
-                                            initial={{ scale: 0 }}
-                                            exit={{ scale: 0 }}
-                                            animate={{ scale: 1 }}
-                                            justify='space-around'
-                                            align='center'
-                                            gap='7px'
-                                            p='7px'
-                                            borderRadius='5px'
-                                            height='auto'
-                                            bg='#8a8585'
-                                            boxShadow='md'
-                                            key={todo.id}
-                                        >
-                                            <input
-                                                type='radio'
-                                                value={todo.id}
-                                                id={todo.id}
-                                                onClick={checkTodo}
-                                                style={{width: '15px', height: '15px', cursor: 'pointer'}}
-                                            >
-                                            </input>
-                                            <Text
-                                                fontSize='md'
-                                                cursor='pointer'
-                                                color='white'
-                                                as='b'
-                                                onClick={() => document.getElementById(todo.id).click()}
-                                            >
-                                                {todo.task}
-                                            </Text>
-                                        </Flex>
-                                    ))}
-                                </Flex>
-                            </Flex>
-
-                            {/*Completed ToDos Container*/}
-                            {completedTodos.length !== 0 && (
-                                <Flex
-                                    direction='column'
-                                    align='flex-start'
-                                    justify='space-around'
-                                    width='100%'
-                                    mt='40px'
-                                    pl={['10px','10px','30px','30px']}
-                                    gap='20px'
-                                    mb='200px'
-                                >
-                                    {/*Title*/}
-                                    <Heading 
-                                        fontSize={['xl','xl','4xl','4xl']}
-                                        width='90%'
-                                        as={motion.div}
-                                        initial={{ scale: 0 }}
-                                        exit={{ scale: 0 }}
-                                        animate={{ scale: 1 }}
-                                    >
-                                        Recently Checked
-                                    </Heading>
-                                    
-                                    {/*Completed ToDos container*/}
-                                    <Flex 
-                                        direction='column'
-                                        align='flex-start'
-                                        justify='space-around'
-                                        gap='20px'
-                                        width='90%' 
-                                    >
-                                        {completedTodos && completedTodos.reverse().map(todo => (
-                                            <Flex
-                                                as={motion.div}
-                                                initial={{ scale: 0 }}
-                                                exit={{ scale: 0 }}
-                                                animate={{ scale: 1 }}
-                                                justify='space-around'
-                                                align='center'
-                                                gap='7px'
-                                                p='7px'
-                                                borderRadius='5px'
-                                                bg='#00A767'
-                                                wordBreak='break-word'
-                                                boxShadow='md'
-                                                key={todo.id}
-                                            >
-                                                <CheckIcon fontSize='md' color='white'/>
-                                                <Text
-                                                    fontSize='md'
-                                                    cursor='pointer'
-                                                    as='b'
-                                                    color='white'
-                                                >
-                                                    {todo.task}
-                                                </Text>
-                                                <Badge colorScheme='green'>NEW</Badge>
-                                            </Flex>
-                                        ))}
-                                    </Flex>
-                                </Flex>
-                            )}
-                        </AnimatePresence> {/*Necessary for exit animation*/}
-                </Box>
-        </Box>
-  )
+              {/*Completed ToDos container*/}
+              <Flex
+                direction="column"
+                align="flex-start"
+                justify="space-around"
+                gap="20px"
+                width="90%"
+              >
+                {completedTodos &&
+                  completedTodos.reverse().map((todo) => (
+                    <Flex
+                      as={motion.div}
+                      initial={{ scale: 0 }}
+                      exit={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      justify="space-around"
+                      align="center"
+                      gap="7px"
+                      p="7px"
+                      borderRadius="5px"
+                      bg="#00A767"
+                      wordBreak="break-word"
+                      boxShadow="md"
+                      key={todo.id}
+                    >
+                      <CheckIcon fontSize="md" color="white" />
+                      <Text fontSize="md" cursor="pointer" as="b" color="white">
+                        {todo.task}
+                      </Text>
+                      <Badge colorScheme="green">NEW</Badge>
+                    </Flex>
+                  ))}
+              </Flex>
+            </Flex>
+          )}
+        </AnimatePresence>{" "}
+        {/*Necessary for exit animation*/}
+      </Box>
+    </Box>
+  );
 }
