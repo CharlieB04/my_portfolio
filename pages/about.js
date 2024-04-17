@@ -72,10 +72,7 @@ export default function About() {
             Telephone number: (+52) 2291267553
           </Text>
           <Text fontSize={["lg", "3xl", "4xl", "4xl"]} textAlign="center">
-            <a
-              href="https://www.linkedin.com/in/carlosquinterogonzalez"
-              target="_blank"
-            >
+            <a href="https://www.linkedin.com/in/carlosquinterogonzalez">
               My linkedin: www.linkedin.com/in/carlosquinterogonzalez
             </a>
           </Text>
